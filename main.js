@@ -1,5 +1,6 @@
 const os = require('os');
 const path = require('path');
+const process = require('process');
 const fs = require('fs').promises;
 const core = require('@actions/core');
 const tc = require('@actions/tool-cache');
@@ -120,4 +121,4 @@ async function main() {
   }
 }
 
-main();
+main().finally(() => process.exit());
