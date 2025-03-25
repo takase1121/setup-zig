@@ -103,8 +103,12 @@ async function main() {
         await tc.extractTar(tarball_path, null, 'xJ'); // J for xz
       core.info(`extract took ${Date.now() - extract_start} ms`);
 
-      const zig_inner_dir = path.join(zig_parent_dir, tarball_name);
-      zig_dir = await tc.cacheDir(zig_inner_dir, 'zig', await common.getVersion());
+      if (os.platform() !== 'win32') {
+        const zig_inner_dir = path.join(zig_parent_dir, tarball_name);
+        zig_dir = await tc.cacheDir(zig_inner_dir, 'zig', await common.getVersion());
+      } else {
+        zig_dir = zig_inner_dir;
+      }
     }
 
     core.addPath(zig_dir);
