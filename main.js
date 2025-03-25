@@ -107,7 +107,7 @@ async function main() {
         const zig_inner_dir = path.join(zig_parent_dir, tarball_name);
         zig_dir = await tc.cacheDir(zig_inner_dir, 'zig', await common.getVersion());
       } else {
-        zig_dir = zig_inner_dir;
+        zig_dir = path.join(zig_parent_dir, tarball_name);
       }
     }
 
